@@ -11,13 +11,13 @@
     <?php
     $nama = "tantri";
     $jmlhuruf = strlen($nama);
-    $tanggal = intval(date("d"));
+    $tanggal = date("d");
     // echo $tanggal;
     // echo "<br>";
     
-    if ($jmlhuruf == $tanggal - 2){
+    if ($jmlhuruf == ($tanggal - 2)){
         echo "Berhasil";
-    } elseif ($jmlhuruf < $tanggal - 2){
+    } elseif ($jmlhuruf < $tanggal){
         echo "Sedikit lagi";
     } else {
         echo "Coba lagi";
@@ -29,26 +29,26 @@
 
     <!-- nomor 2 -->
     <?php
-    $anggota = [
-        ["Nama" => "Fatma", "NIM" => "123456"],
-        ["Nama" => "Syifa", "NIM" => "234567"],
-        ["Nama" => "Hafiz", "NIM" => "345678"],
-        ["Nama" => "Surya", "NIM" => "456789"],
-        ["Nama" => "Grey", "NIM" => "567890"]
-    ];
-
-    function getPeran($nim){
-    if (intval(substr($nim, -1)) % 2 == 0) {
-        return "Back-end Developer";
-    } else {
-        return "Front-end Developer";}
-    }
-
+    $anggota = array
+    (   
+    array("Fatma",123),
+    array("Syifa",456),
+    array("Hafiz",789),
+    array("Surya",012),
+    array("Grey",345)
+    );
     foreach ($anggota as $member) {
-        $nama = $member["Nama"];
-        $nim = $member["NIM"];
-        $peran = getPeran($nim);
-        echo "Nama: $nama, NIM: $nim, Peran: $peran <br>";
+    $nama = $member[0];
+    $nim = $member[1];
+
+    if ($nim % 2 == 0) {
+        $peran = "Back-end Developer";
+    } else {
+        $peran = "Front-end Developer";
+    }
+    // $peran = ($nim % 2 == 0) ? "Back-end Developer" : "Front-end Developer";
+
+    echo "$nama : $peran <br>";
     }
     ?>
 
@@ -74,22 +74,26 @@
         "Nusa Tenggara Barat"
     ];
     
+    foreach ($namaArray as $huruf) {
+    $huruf = strtoupper($huruf);
+    $found = false;
 
-    // Inisialisasi kota tujuan awal
-    $kotaTujuan = "Jawa Timur";
-
-    // Menentukan kota tujuan berdasarkan huruf-huruf dalam nama depan
-    foreach ($hurufNama as $huruf) {
-        foreach ($kota as $k) {
-            if (strtolower(substr($k, 0, 1)) === $huruf) {
-                $kotaTujuan = $k;
-                break 2; // Keluar dari kedua perulangan
+    foreach ($kota as $k) {
+        if (strtoupper($k[0]) === $huruf) {
+            $penempatan = $k;
+            $found = true;
+            break;
+        } else {
+            $penempatan = "Jawa Timur";
             }
+        }
+
+    if ($found) {
+        break;
         }
     }
 
-    // Menampilkan kota tujuan KKN
-    echo "Kota Tujuan KKN: $kotaTujuan";
+    echo $nama . " ditugaskan di kota : " . $penempatan;
     ?>
 
 </body>
