@@ -74,26 +74,21 @@
         "Nusa Tenggara Barat"
     ];
     
-    foreach ($namaArray as $huruf) {
-    $huruf = strtoupper($huruf);
-    $found = false;
+    // Inisialisasi kota tujuan awal
+    $kotaTujuan = "Jawa Timur";
 
-    foreach ($kota as $k) {
-        if (strtoupper($k[0]) === $huruf) {
-            $penempatan = $k;
-            $found = true;
-            break;
-        } else {
-            $penempatan = "Jawa Timur";
+    // Menentukan kota tujuan berdasarkan huruf-huruf dalam nama depan
+    foreach ($hurufNama as $huruf) {
+        foreach ($kota as $k) {
+            if (strtolower(substr($k, 0, 1)) === $huruf) {
+                $kotaTujuan = $k;
+                break 2; // Keluar dari kedua perulangan
             }
-        }
-
-    if ($found) {
-        break;
         }
     }
 
-    echo $nama . " ditugaskan di kota : " . $penempatan;
+    // Menampilkan kota tujuan KKN
+    echo "Kota Tujuan KKN $namaDepan adalah $kotaTujuan";
     ?>
 
 </body>
